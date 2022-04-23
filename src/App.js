@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ToDoList from './components/ToDoList';
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [inputText, setInputText] = React.useState("");
+  const [todolist, setTodoList] = React.useState([
+  //   {
+  //     task: "shower",
+  // },
+  // {
+  //     task: "cook",
+  // },
+  // {
+  //     task: "eat",
+  // }
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='input' >
+      <div className="input-group mb-3">
+        <input className="form-control"  placeholder='Add To Do...' value={inputText} onChange={(event) => setInputText(event.target.value)} type="text"/>
+        
+        <button className="btn btn-outline-success" onClick={() => {
+          setTodoList([...todolist, {task:inputText}]) 
+          setInputText("")
+          }}> Submit </button>
+      </div>
+      <div className='container'>
+        <ToDoList items={todolist}/>
+      </div>
     </div>
-  );
-}
-
+  )
+};
 export default App;
